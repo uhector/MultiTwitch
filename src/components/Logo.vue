@@ -1,6 +1,6 @@
 <template>
   <div class="logo">
-    multwitch
+    MultiTwitch
   </div>
 </template>
 
@@ -8,6 +8,7 @@
 .logo {
   font-size: 2rem;
   font-weight: 600;
-  color: var(--color-primary)
+  color: var(--color-primary);
+  user-select: none;
 }
 </style>
