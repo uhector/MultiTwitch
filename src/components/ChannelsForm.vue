@@ -1,8 +1,8 @@
 <script setup>
 import { ref } from 'vue'
-
 import BaseButton from './BaseButton.vue'
 import BaseInput from './BaseInput.vue'
+import ChannelsList from './ChannelsList.vue'
 
 const props = defineProps({
   initialChannels: {
@@ -11,84 +11,75 @@ const props = defineProps({
   }
 })
 
-defineEmits(['submit'])
-
-const channels = ref([...props.initialChannels])
+const channels = ref([ ...props.initialChannels ])
 const channelInput = ref("")
 
-function addChannel() {
-  if (channelInput.value)
+/* It handles the form group submit event */
+function handleSubmit() {
+  if (channelInput.value) {
     channels.value.push(channelInput.value)
     channelInput.value = ""
+  }
 }
 </script>
 
 <template>
   <form class="form">
     <div class="form-group">
-      <BaseInput
-        v-model="channelInput"
-        id="channelInput"
-        label="Channel name"
-        type="text"
-        class="form-group__input"
-      />
-      <BaseButton @click="addChannel">Add channel</BaseButton>
+      <div class="form-group__input">
+        <!-- BaseInput -->
+        <BaseInput
+          v-model="channelInput"
+          id="channelInput"
+          label="Channel name"
+          type="text"
+        />
+      </div>
+      <div class="form-group__button">
+        <!-- BaseButton -->
+        <BaseButton
+          @click.prevent="handleSubmit"
+          type="submit">
+          Add channel
+        </BaseButton>
+      </div>
     </div>
-
-    <div class="channels">
-      <span v-for="channel, index of channels" class="channels__item">
-        <span class="channels__item-text">{{ channel }}</span>
-        <span @click="channels.splice(index, 1)" class="channels__item-button">x</span>
-      </span>
-    </div>
-    
-    <BaseButton @click="$emit('submit', channels)" :disabled="channels.length === 0" type="button">Watch!</BaseButton>
+    <!-- ChannelsList -->
+    <ChannelsList
+      @delete-channel="(index) => channels.splice(index, 1)"
+      :channels="channels"
+      class="channels-list"
+    />
+    <!-- BaseButton -->
+    <BaseButton
+      @click="$emit('submit', channels)"
+      :disabled="channels.length === 0"
+      type="button">
+      Watch!
+    </BaseButton>
   </form>
 </template>
 
 <style scoped>
 .form-group {
   display: flex;
+  justify-content: space-between;
   align-items: flex-end;
+  width: 100%;
   margin-bottom: 20px;
 }
 
 .form-group__input {
-  min-width: 70%;
-  margin-right: 10px;
+  width: 70%;
+  margin-right: 20px;
 }
 
-.channels {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
+.form-group__button {
+  width: 30%;
+}
+
+.channels-list {
   width: 100%;
   margin: 20px 0;
-}
-
-.channels__item {
-  display: inline-block;
-  margin: 5px;
-  padding: 0.25em 0.5em;
-
-  font-weight: 500;
-
-  background-color: var(--color-grey);
-  border-radius: 4px;
-}
-
-.channels__item-button {
-  padding-left: 0.2em;
-
-  font-size: 1.2em;
-  font-weight: 500;
-  
-  color: var(--color-primary);
-  border-style: none;
-}
-
-.channels__item-button:hover {
-  cursor: pointer;
 }
 </style>
