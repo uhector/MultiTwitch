@@ -1,12 +1,11 @@
 <script setup>
+import { inject } from 'vue';
 import { useRouter } from 'vue-router'
-
-import Card from '../components/Card.vue'
+import BrandedCard from '../components/BrandedCard.vue'
 import ChannelsForm from '../components/ChannelsForm.vue'
-import Divider from '../components/Divider.vue'
-import Logo from '../components/Logo.vue'
 
 const router = useRouter()
+const githubURL = inject('githubURL')
 
 function handleSubmit(channels) {
   router.push({ path: '/watch', query: channels })
@@ -15,25 +14,16 @@ function handleSubmit(channels) {
 
 <template>
   <div class="container">
-    <!-- Card -->
-    <Card class="card">
-      <!-- Logo -->
-      <Logo />
-      <p class="description">
-        Watch any number of <a href="https://twitch.tv" target="_blank">Twitch.tv</a>
-        streams at the same time, on the same page <span>:)</span>
-      </p>
-      <!-- Divider -->
-      <Divider class="divider"/>
-      <!-- ChannelsForm -->
+    <BrandedCard :show-description="true" class="branded-card">
       <ChannelsForm
         @submit="handleSubmit"
         class="channels-form"
       />
-    </Card>
+    </BrandedCard>
+    <!-- Github repository link -->
     <div class="github-link">
-      <a href="https://github.com/ulacioh/multwitch" target="_blank">
-        <img src="GitHub-Mark-Light-32px.png" alt="GitHub Mark">
+      <a :href="githubURL" target="_blank">
+        <img src="/GitHub-Mark-Light-32px.png" alt="GitHub link">
       </a>
     </div>
   </div>
@@ -41,34 +31,19 @@ function handleSubmit(channels) {
 
 <style scoped>
 .container {
+  position: absolute;
+
   display: flex;
   justify-content: center;
   align-items: center;
   width: 100vw;
   height: 100vh;
+
   background-color: var(--color-dark);
 }
 
-.card {
+.branded-card {
   max-width: 350px;
-}
-
-.description {
-  font-size: 0.8em;
-  font-weight: 500;
-}
-
-.description a {
-  text-decoration: none;
-  color: var(--color-secondary);
-}
-
-.description span {
-  color: var(--color-secondary);
-}
-
-.divider {
-  margin-bottom: 20px;
 }
 
 .github-link {

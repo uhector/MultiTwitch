@@ -2,20 +2,17 @@
 import ChannelsListItem from './ChannelsListItem.vue'
 
 defineProps({
-  channels: {
-    type: Array,
-    required: true
-  }
+  channels: { type: Array, required: true }
 })
 </script>
 
 <template>
   <ul class="channels-list">
-    <!-- ChannelsListItem -->
     <ChannelsListItem
       v-for="channel, index in channels"
       @delete-channel="$emit('delete-channel', $event)"
-      :index="index">
+      :index="index"
+    >
       {{ channel }}
     </ChannelsListItem>
   </ul>

@@ -1,17 +1,12 @@
 <script setup>
-defineProps(['id', 'modelValue', 'label', 'type'])
-defineEmits(['update:modelValue'])
+defineProps([ 'id', 'modelValue', 'label', 'type' ])
+defineEmits([ 'update:modelValue' ])
 </script>
 
 <template>
-  <!-- Label -->
-  <label
-    v-if="label"
-    :for="id"
-    class="label">
+  <label v-if="label" :for="id" class="label">
     {{ label }}
   </label>
-  <!-- Input -->
   <input
     @input="$emit('update:modelValue', $event.target.value)"
     :id="id"
@@ -32,10 +27,8 @@ defineEmits(['update:modelValue'])
   width: 100%;
   padding-left: 0.5em;
 
-  font-size: 1em;
-
-  color: var(--color-text-dark);
   background-color: rgba(0 0 0 / 0.1);
+  color: var(--color-text-dark);
   border-color: rgba(0 0 0 / 0);
   border-radius: 4px;
 }

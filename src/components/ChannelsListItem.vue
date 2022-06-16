@@ -1,19 +1,14 @@
 <script setup>
 defineProps({
-  index: {
-    type: Number,
-    required: true
-  }
+  index: { type: Number, required: true }
 })
 </script>
 
 <template>
   <li class="channels-list-item">
-    <!-- Text -->
     <span class="channels-list-item__text">
       <slot></slot>
     </span>
-    <!-- Button -->
     <span
       @click="$emit('delete-channel', index)"
       class="channels-list-item__button">

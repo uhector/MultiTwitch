@@ -1,14 +1,9 @@
 <script setup>
 import { ref } from 'vue'
-import BaseButton from './BaseButton.vue'
-import BaseInput from './BaseInput.vue'
 import ChannelsList from './ChannelsList.vue'
 
 const props = defineProps({
-  initialChannels: {
-    typle: Array,
-    default: []
-  }
+  initialChannels: { typle: Array, default: [] }
 })
 
 const channels = ref([ ...props.initialChannels ])
@@ -27,7 +22,6 @@ function handleSubmit() {
   <form class="form">
     <div class="form-group">
       <div class="form-group__input">
-        <!-- BaseInput -->
         <BaseInput
           v-model="channelInput"
           id="channelInput"
@@ -36,25 +30,25 @@ function handleSubmit() {
         />
       </div>
       <div class="form-group__button">
-        <!-- BaseButton -->
         <BaseButton
           @click.prevent="handleSubmit"
-          type="submit">
+          type="submit"
+        >
           Add channel
         </BaseButton>
       </div>
     </div>
-    <!-- ChannelsList -->
     <ChannelsList
       @delete-channel="(index) => channels.splice(index, 1)"
       :channels="channels"
       class="channels-list"
     />
-    <!-- BaseButton -->
     <BaseButton
       @click="$emit('submit', channels)"
       :disabled="channels.length === 0"
-      type="button">
+      type="button"
+      class="form__submit"
+    >
       Watch!
     </BaseButton>
   </form>
@@ -81,5 +75,9 @@ function handleSubmit() {
 .channels-list {
   width: 100%;
   margin: 20px 0;
+}
+
+.form__submit {
+  width: 100%;
 }
 </style>
