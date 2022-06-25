@@ -10,6 +10,7 @@ defineProps({
   <ul class="channels-list">
     <ChannelsListItem
       v-for="channel, index in channels"
+      :key="index"
       @delete-channel="$emit('delete-channel', $event)"
       :index="index"
     >

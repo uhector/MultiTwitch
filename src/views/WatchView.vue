@@ -9,18 +9,19 @@ import Screen from '../components/Screen.vue'
 const route = useRoute()
 const router = useRouter()
 
-const showModal = ref(true)
+const showModal = ref(false)
 
 const channels = computed(() => {
-    return Object.entries(route.query).map(([key, value]) => value)
+  return Object.entries(route.query).map(([key, value]) => value)
 })
 
 watch(channels, (value) => {
-  if (value.length === 0)
-    router.push({ path: '/'})
+  if (value.length === 0) {
+    router.push({ path: '/' })
+  }
 })
 
-function handleSubmit(channels) {
+function handleSubmit (channels) {
   router.push({ query: channels })
   showModal.value = false
 }
@@ -56,7 +57,6 @@ function handleSubmit(channels) {
   width: 100vw;
   height: 100vh;
 }
-
 .screen {
   width: 100%;
   height: 100%;

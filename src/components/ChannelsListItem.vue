@@ -38,7 +38,7 @@ defineProps({
 
   font-size: 1.2em;
   font-weight: 500;
-  
+
   color: var(--color-secondary);
   border-style: none;
 }

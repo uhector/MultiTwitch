@@ -1,5 +1,5 @@
 <script setup>
-defineEmits([ 'close' ])
+defineEmits(['close'])
 </script>
 
 <template>
@@ -27,13 +27,13 @@ defineEmits([ 'close' ])
   position: relative;
 }
 
-.modal__button { 
+.modal__button {
   position: absolute;
   top: 5px;
   right: 7px;
 
   padding: 0px;
-  
+
   font-size: 1.2em;
   font-weight: 700;
 

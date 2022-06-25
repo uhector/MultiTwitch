@@ -6,14 +6,14 @@ const props = defineProps({
   initialChannels: { typle: Array, default: [] }
 })
 
-const channels = ref([ ...props.initialChannels ])
-const channelInput = ref("")
+const channels = ref([...props.initialChannels])
+const channelInput = ref('')
 
 /* It handles the form group submit event */
-function handleSubmit() {
+function handleSubmit () {
   if (channelInput.value) {
     channels.value.push(channelInput.value)
-    channelInput.value = ""
+    channelInput.value = ''
   }
 }
 </script>

@@ -8,17 +8,18 @@ const root = ref(null)
 const optimalSize = reactive({ width: '', height: '' })
 
 // https://github.com/bhamrick/multitwitch/blob/master/multitwitch/static/js/multitwitch.js#L6
-function computeOptimalSize(entries) {
+function computeOptimalSize (entries) {
   const containerWitdth = entries[0].contentRect.width
   const containerheight = entries[0].contentRect.height
 
-  if (props.channels.length === 0)
+  if (props.channels.length === 0) {
     return
+  }
 
   let width = 0
   let height = 0
   for (let i = 1; i <= props.channels.length; i++) {
-    let rows = Math.ceil(props.channels.length / i)
+    const rows = Math.ceil(props.channels.length / i)
     let maxWidth = Math.floor(containerWitdth / i)
     let maxHeight = Math.floor(containerheight / rows)
 
@@ -27,7 +28,7 @@ function computeOptimalSize(entries) {
     } else {
       maxWidth = maxHeight * (16 / 9)
     }
-    
+
     if (maxWidth > width) {
       width = maxWidth
       height = maxHeight
