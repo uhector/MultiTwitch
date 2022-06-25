@@ -1,6 +1,6 @@
 <script setup>
-defineProps([ 'id', 'modelValue', 'label', 'type' ])
-defineEmits([ 'update:modelValue' ])
+defineProps(['id', 'modelValue', 'label', 'type'])
+defineEmits(['update:modelValue'])
 </script>
 
 <template>
